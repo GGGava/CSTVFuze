@@ -1,0 +1,35 @@
+//
+//  Endpoints.swift
+//  CSTVFuze
+//
+//  Created by Gustavo Gava on 05/03/2025.
+//
+
+import Foundation
+
+final class GetMatchesEndpoint: PandaScoreEndpoint {
+    init(params: [String: String]) {
+        super.init(
+            url: "matches",
+            method: .get,
+            params: params
+        )
+    }
+}
+
+class PandaScoreEndpoint: Endpoint {
+    var token: String?
+    var url: String
+    var method: HTTPMethod
+    var params: [String : String]
+    
+    init(url: String, method: HTTPMethod, params: [String : String]) {
+        self.url = "https://api.pandascore.co/csgo/" + url
+        self.method = method
+        self.params = params
+        
+        if let apiKey = ProcessInfo.processInfo.environment["PANDA_API_KEY"] {
+            self.token = apiKey
+        }
+    }
+}
