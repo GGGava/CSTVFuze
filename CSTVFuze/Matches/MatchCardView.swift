@@ -10,37 +10,9 @@ import SwiftUI
 struct MatchCardView: View {
     var match: Match
     
-    var matchTimeString: String {
-        if match.status == .running {
-            return "AGORA"
-        }
-        return match.date?.formatInPortuguese() ?? "???"
-    }
-    
-    var matchTimeView: some View {
-        HStack {
-            Spacer()
-            Text(matchTimeString)
-                .font(size: 8)
-                .padding(8)
-                .foregroundStyle(.white)
-                .fontWeight(.bold)
-                .background(
-                    match.status == .running ? .red500 : .transparentWhite)
-                .clipShape(
-                    .rect(
-                        topLeadingRadius: 0,
-                        bottomLeadingRadius: 16,
-                        bottomTrailingRadius: 0,
-                        topTrailingRadius: 0
-                    )
-                )
-        }
-    }
-    
     var body: some View {
         VStack {
-            matchTimeView
+            MatchTimeView(date: match.date, status: match.status)
             
             TeamsVsView(
                 teamA: match.opponents?.first?.opponent,
@@ -57,6 +29,44 @@ struct MatchCardView: View {
         .frame(maxWidth: .infinity)
         .background(.gray700)
         .clipShape(RoundedRectangle(cornerRadius: 16))
+    }
+}
+
+// MARK: Subviews
+
+extension MatchCardView {
+    struct MatchTimeView: View {
+        
+        var date: Date?
+        var status: Match.Status?
+        
+        var matchTimeString: String {
+            if status == .running {
+                return "AGORA"
+            }
+            return date?.formatInPortuguese() ?? "???"
+        }
+        
+        var body: some View {
+            HStack {
+                Spacer()
+                Text(matchTimeString)
+                    .font(size: 8)
+                    .padding(8)
+                    .foregroundStyle(.white)
+                    .fontWeight(.bold)
+                    .background(
+                        status == .running ? .red500 : .transparentWhite)
+                    .clipShape(
+                        .rect(
+                            topLeadingRadius: 0,
+                            bottomLeadingRadius: 16,
+                            bottomTrailingRadius: 0,
+                            topTrailingRadius: 0
+                        )
+                    )
+            }
+        }
     }
     
     struct LeagueSerieFooterView: View {
@@ -82,30 +92,27 @@ struct MatchCardView: View {
 #Preview {
     VStack {
         MatchCardView(
-            match: .init(
+            match: Match(
                 id: 1,
                 name: "Preview Match",
                 status: .running,
                 league: .init(
                     id: 2,
-                    name: "CCT Europe",
-                    imageUrl: "https://cdn.pandascore.co/images/league/image/5232/799px-cct_2024_europe_allmode-png"
+                    name: "CCT Europe"
                 ),
                 opponents: [
                     .init(
                         opponent: .init(
                             id: 3,
                             name: "Sinners",
-                            acronym: "SIN",
-                            imageUrl: "https://cdn.pandascore.co/images/team/image/127014/927px_sinners_esports_full_allmode.png"
+                            acronym: "SIN"
                         )
                     ),
                     .init(
                         opponent: .init(
                             id: 4,
                             name: "ECSTATIC",
-                            acronym: "ECS",
-                            imageUrl: "https://cdn.pandascore.co/images/team/image/129856/600px_ecstatic_2023_allmode.png"
+                            acronym: "ECS"
                         )
                     )
                 ],

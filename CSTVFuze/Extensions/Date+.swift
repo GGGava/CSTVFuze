@@ -23,7 +23,15 @@ extension Date {
         
         if calendar.isDate(self, equalTo: currentDate, toGranularity: .weekOfYear) {
             formatter.dateFormat = "EEE, HH:mm"
-            return formatter.string(from: self)
+            var result = formatter.string(from: self)
+            
+            if let firstDotIndex = result.firstIndex(of: ".") {
+                result.remove(at: firstDotIndex)
+            }
+            
+            result = result.capitalized
+            
+            return result
         }
         
         formatter.dateFormat = "dd.MM HH:mm"

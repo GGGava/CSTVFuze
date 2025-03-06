@@ -10,6 +10,7 @@ import SwiftUI
 protocol MatchesViewModel {
     var matches: [Match] { get }
     var loading: Bool { get }
+    var hasError: Bool { get }
     
     func getMatches() async
 }
@@ -19,6 +20,7 @@ extension MatchesView {
     final class ViewModel<Repository: MatchRepository>: MatchesViewModel {
         var matches: [Match] = []
         var loading = false
+        var hasError = false
         
         let repository: Repository
         
@@ -31,7 +33,13 @@ extension MatchesView {
         
         func getMatches() async {
             loading = true
-            matches = try! await repository.getMatchesList()
+            hasError = false
+            do {
+                matches = try await repository.getMatchesList()
+            } catch {
+                print("Error while fetching list of matches: \(error)")
+                hasError = true
+            }
             loading = false
         }
     }
