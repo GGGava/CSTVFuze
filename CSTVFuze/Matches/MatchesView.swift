@@ -12,21 +12,19 @@ struct MatchesView: View {
 
     var body: some View {
         ScrollView {
-            if viewModel.loading {
-                ProgressView()
-            } else {
-                LazyVStack {
-                    ForEach(viewModel.matches) { match in
-                        VStack {
-                            Text("\(match.id)")
-                            Text(match.name ?? "")
-                            Text(match.status?.rawValue ?? "")
-                            Text(match.beginAt ?? "")
-                        }
-                    }
+            VStack(alignment: .leading, spacing: 24) {
+                Text("Partidas")
+                    .font(size: 32)
+                    .foregroundStyle(.white)
+                    .fontWeight(.medium)
+                
+                ForEach(viewModel.matches) {
+                    MatchCardView(match: $0)
                 }
             }
+            .padding(24)
         }
+        .background(.gray900)
         .refreshable {
             await viewModel.getMatches()
         }

@@ -19,6 +19,7 @@ struct Match: Codable, Identifiable {
     var league: League?
     var opponents: [Opponent]?
     var beginAt: String?
+    var serie: Serie?
     
     var date: Date? {
         guard let beginAt = beginAt else { return nil }

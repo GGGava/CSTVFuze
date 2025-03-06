@@ -18,7 +18,7 @@ struct PandaScoreMatchRepository: MatchRepository {
         let endpoint = GetMatchesEndpoint(
             params: [
                 "filter[status]":"running,not_started",
-                "sort":"begin_at"
+                "sort":"-status,begin_at"
             ]
         )
         let data = try await networkHandler.request(endpoint)
