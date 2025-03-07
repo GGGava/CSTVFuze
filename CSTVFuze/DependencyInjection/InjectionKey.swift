@@ -25,6 +25,10 @@ private struct MatchRepositoryKey: InjectionKey {
     static var currentValue: MatchRepository = PandaScoreMatchRepository()
 }
 
+private struct TeamsRepositoryKey: InjectionKey {
+    static var currentValue: TeamsRepository = PandaScoreTeamsRepository()
+}
+
 extension InjectedValues {
     var networkHandler: NetworkHandling {
         get { Self[NetworkHandlerKey.self] }
@@ -34,5 +38,15 @@ extension InjectedValues {
     var jsonHandler: JSONHandling {
         get { Self[JSONHandlerKey.self] }
         set { Self[JSONHandlerKey.self] = newValue }
+    }
+    
+    var matchRepository: MatchRepository {
+        get { Self[MatchRepositoryKey.self] }
+        set { Self[MatchRepositoryKey.self] = newValue }
+    }
+    
+    var teamsRepository: TeamsRepository {
+        get { Self[TeamsRepositoryKey.self] }
+        set { Self[TeamsRepositoryKey.self] = newValue }
     }
 }

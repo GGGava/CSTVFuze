@@ -42,6 +42,10 @@ final class NetworkHandler<Session: NetworkSession>: NetworkHandling {
             throw Self.Error(.urlError)
         }
         
+        if endpoint.params.keys.isEmpty {
+            return url
+        }
+        
         let queryParams = endpoint.params.keys.map { key in
             URLQueryItem(name: key, value: endpoint.params[key])
         }

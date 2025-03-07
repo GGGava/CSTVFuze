@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol MatchesViewModel {
+protocol MatchesListViewModel {
     var matches: [Match] { get }
     var loading: Bool { get }
     var hasError: Bool { get }
@@ -15,13 +15,14 @@ protocol MatchesViewModel {
     func getMatches() async
 }
 
-extension MatchesView {
+extension MatchesListView {
     @Observable
-    final class ViewModel<Repository: MatchRepository>: MatchesViewModel {
+    final class ViewModel<Repository: MatchRepository>: MatchesListViewModel {
         var matches: [Match] = []
         var loading = false
         var hasError = false
-        
+
+        //TODO: Inject repository
         let repository: Repository
         
         init(repository: Repository) {

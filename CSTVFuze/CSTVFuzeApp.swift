@@ -11,7 +11,7 @@ import SwiftUI
 struct CSTVFuzeApp: App {
     @State var showSplashScreen = true
     
-    var matchesViewModel = MatchesView.ViewModel(
+    var matchesViewModel = MatchesListView.ViewModel(
         repository: PandaScoreMatchRepository()
     )
 
@@ -24,7 +24,7 @@ struct CSTVFuzeApp: App {
                         showSplashScreen = false
                     }
             } else {
-                MatchesView(viewModel: matchesViewModel)
+                MatchesListView(viewModel: matchesViewModel)
             }
         }
     }

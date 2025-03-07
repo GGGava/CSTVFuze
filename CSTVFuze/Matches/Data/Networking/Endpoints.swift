@@ -10,9 +10,19 @@ import Foundation
 final class GetMatchesEndpoint: PandaScoreEndpoint {
     init(params: [String: String]) {
         super.init(
-            url: "matches",
+            url: "csgo/matches",
             method: .get,
             params: params
+        )
+    }
+}
+
+final class GetTeamEndpoint: PandaScoreEndpoint {
+    init(team: Int) {
+        super.init(
+            url: "teams/" + "\(team)",
+            method: .get,
+            params: [:]
         )
     }
 }
@@ -24,7 +34,7 @@ class PandaScoreEndpoint: Endpoint {
     var params: [String : String]
     
     init(url: String, method: HTTPMethod, params: [String : String]) {
-        self.url = "https://api.pandascore.co/csgo/" + url
+        self.url = "https://api.pandascore.co/" + url
         self.method = method
         self.params = params
         
