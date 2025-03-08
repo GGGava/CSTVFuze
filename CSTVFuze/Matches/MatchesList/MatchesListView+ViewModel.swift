@@ -15,6 +15,10 @@ extension MatchesListView {
         @Published var loading = false
         @Published var hasError = false
         
+        var nextPage = 1
+        @Published var loadingNextPage = false
+        @Published var finishedPages = false
+        
         init() {
             Task {
                 await getMatches()
@@ -26,12 +30,36 @@ extension MatchesListView {
             loading = true
             hasError = false
             do {
-                matches = try await repository.getMatchesList()
+                matches = try await repository.getMatchesList(page: 1)
+                nextPage = 2
             } catch {
                 print("Error while fetching list of matches: \(error)")
                 hasError = true
             }
             loading = false
+        }
+        
+        @MainActor
+        func loadMore() async {
+            guard !finishedPages else {
+                return
+            }
+            loadingNextPage = true
+            
+            do {
+                let nextMatches = try await repository.getMatchesList(page: nextPage)
+                
+                matches.append(contentsOf: nextMatches)
+                if nextMatches.count < 10 {
+                    finishedPages = true
+                } else {
+                    nextPage += 1
+                }
+                loadingNextPage = false
+            } catch {
+                print("Error while fetching next page of matches: \(error)")
+                loadingNextPage = false
+            }
         }
     }
 }

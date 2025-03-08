@@ -30,7 +30,18 @@ struct MatchesListView: View {
                         } label: {
                             MatchCardView(match: match)
                         }
+                        .onAppear {
+                            Task {
+                                if match.id == viewModel.matches.last?.id {
+                                    await viewModel.loadMore()
+                                }
+                            }
+                        }
                     }
+                    ProgressView()
+                        .tint(.white)
+                        .opacity(viewModel.loadingNextPage ? 1 : 0)
+                    
                 }
                 .loadingView(loading: viewModel.loading, hasError: viewModel.hasError)
             }
@@ -56,7 +67,7 @@ struct MatchesListView: View {
 }
 
 fileprivate final class MockedRepository: MatchListRepository {
-    func getMatchesList() async throws -> [Match] {
+    func getMatchesList(page: Int = 1) async throws -> [Match] {
         return [
             .init(id: 1, name: "Match 1", status: .running, beginAt: .now),
             .init(id: 2, name: "Match 2", status: .notStarted, beginAt: .now)

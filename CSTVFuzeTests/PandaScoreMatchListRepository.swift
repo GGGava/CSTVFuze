@@ -20,7 +20,7 @@ class PandaScoreMatchListRepositoryTests: XCTestCase {
         InjectedValues[\.networkHandler] = NetworkHandlerMock()
 
         do {
-            let _ = try await testingSubject.getMatchesList()
+            let _ = try await testingSubject.getMatchesList(page: 1)
             XCTFail()
         } catch {
             if let error = try? XCTUnwrap(error as NSError) {
@@ -34,7 +34,7 @@ class PandaScoreMatchListRepositoryTests: XCTestCase {
         InjectedValues[\.jsonHandler] = JsonHandlerMock()
 
         do {
-            let _ = try await testingSubject.getMatchesList()
+            let _ = try await testingSubject.getMatchesList(page: 1)
             XCTFail()
         } catch {
             if let error = try? XCTUnwrap(error as NSError) {
@@ -51,7 +51,7 @@ class PandaScoreMatchListRepositoryTests: XCTestCase {
         )
         
         do {
-            let response = try await testingSubject.getMatchesList()
+            let response = try await testingSubject.getMatchesList(page: 1)
             XCTAssertEqual(1, response.count)
         } catch {
             XCTFail()
