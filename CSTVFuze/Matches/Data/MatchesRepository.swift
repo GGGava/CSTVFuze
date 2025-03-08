@@ -5,11 +5,11 @@
 //  Created by Gustavo Gava on 05/03/2025.
 //
 
-protocol MatchRepository {
+protocol MatchListRepository {
     func getMatchesList() async throws -> [Match]
 }
 
-struct PandaScoreMatchRepository: MatchRepository {
+struct PandaScoreMatchListRepository: MatchListRepository {
     @Injected(\.networkHandler) var networkHandler: NetworkHandling
     @Injected(\.jsonHandler) var jsonHandler: JSONHandling
 

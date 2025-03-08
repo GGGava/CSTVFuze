@@ -12,10 +12,16 @@ struct MatchStatsView: View {
     @Environment(\.dismiss) var dismiss
     
     var matchTimeString: String {
-        if viewModel.matchStatus == .running {
+        if viewModel.match.status == .running {
             return "AGORA"
         }
-        return viewModel.matchTime?.formatInPortuguese() ?? "???"
+        return viewModel.match.date?.formatInPortuguese() ?? "???"
+    }
+
+    var serieLeagueName: String {
+        let leagueName = viewModel.match.league?.name ?? ""
+        let serieName = viewModel.match.serie?.name ?? ""
+        return leagueName + " " + serieName
     }
 
     var body: some View {
@@ -32,7 +38,7 @@ struct MatchStatsView: View {
                         .bold()
                         .foregroundStyle(.white)
                         .padding(8)
-                        .background(viewModel.matchStatus == .running ? .red : .clear)
+                        .background(viewModel.match.status == .running ? .red : .clear)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                     
                     HStack(alignment: .top, spacing: 20) {
@@ -58,11 +64,6 @@ struct MatchStatsView: View {
             .onAppear {
                 UIRefreshControl.appearance().tintColor = .clear
             }
-            .refreshable {
-                Task {
-                    await viewModel.getTeams()
-                }
-            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
@@ -75,7 +76,7 @@ struct MatchStatsView: View {
                     }
                 }
                 ToolbarItem(placement: .principal) {
-                    Text(viewModel.serieLeagueName)
+                    Text(serieLeagueName)
                         .font(size: 18)
                         .fontWeight(.medium)
                         .foregroundStyle(.white)
@@ -99,7 +100,6 @@ extension MatchStatsView {
                 if let image = result.image {
                     image
                         .resizable()
-                        .scaledToFill()
                         .frame(width: 60, height: 60)
                 } else {
                     Rectangle()
@@ -207,19 +207,25 @@ extension MatchStatsView {
     return MatchStatsView(
         viewModel: .init(
             match: .init(
-                id: 1,
-                status: .notStarted,
-                opponents: [
-                    .init(opponent: .init(id: 2)),
-                    .init(opponent: .init(id: 3)),
-                ],
-                beginAt: "2025-03-07T15:51:24Z"
+                id: 1
             )
         )
     )
 }
 
-fileprivate final class MockedRepository: OpponentsRepository {
+fileprivate final class MockedRepository: MatchStatsRepository {
+    func getMatch(matchId: Int) async throws -> Match {
+        return .init(
+            id: 1,
+            status: .notStarted,
+            opponents: [
+                .init(opponent: .init(id: 2)),
+                .init(opponent: .init(id: 3)),
+            ],
+            beginAt: "2025-03-07T15:51:24Z"
+        )
+    }
+    
     func getMatchOpponents(matchId: Int) async throws -> [Team] {
         [.init(
             id: 1,

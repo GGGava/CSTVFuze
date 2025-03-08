@@ -21,12 +21,12 @@ private struct JSONHandlerKey: InjectionKey {
     static var currentValue: JSONHandling = JSONHandler()
 }
 
-private struct MatchRepositoryKey: InjectionKey {
-    static var currentValue: MatchRepository = PandaScoreMatchRepository()
+private struct MatchListRepositoryKey: InjectionKey {
+    static var currentValue: MatchListRepository = PandaScoreMatchListRepository()
 }
 
-private struct OponnentsRepositoryKey: InjectionKey {
-    static var currentValue: OpponentsRepository = PandaScoreOpponentsRepository()
+private struct OpponentsRepositoryKey: InjectionKey {
+    static var currentValue: MatchStatsRepository = PandaScoreMatchStatsRepository()
 }
 
 extension InjectedValues {
@@ -40,13 +40,13 @@ extension InjectedValues {
         set { Self[JSONHandlerKey.self] = newValue }
     }
     
-    var matchRepository: MatchRepository {
-        get { Self[MatchRepositoryKey.self] }
-        set { Self[MatchRepositoryKey.self] = newValue }
+    var matchRepository: MatchListRepository {
+        get { Self[MatchListRepositoryKey.self] }
+        set { Self[MatchListRepositoryKey.self] = newValue }
     }
     
-    var opponentsRepository: OpponentsRepository {
-        get { Self[OponnentsRepositoryKey.self] }
-        set { Self[OponnentsRepositoryKey.self] = newValue }
+    var opponentsRepository: MatchStatsRepository {
+        get { Self[OpponentsRepositoryKey.self] }
+        set { Self[OpponentsRepositoryKey.self] = newValue }
     }
 }

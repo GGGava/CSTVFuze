@@ -55,7 +55,7 @@ struct MatchesListView: View {
     return MatchesListView(viewModel: MatchesListView.ViewModel())
 }
 
-fileprivate final class MockedRepository: MatchRepository {
+fileprivate final class MockedRepository: MatchListRepository {
     func getMatchesList() async throws -> [Match] {
         return [
             .init(id: 1, name: "Match 1", status: .running, beginAt: "2020-11-12T15:51:24Z"),

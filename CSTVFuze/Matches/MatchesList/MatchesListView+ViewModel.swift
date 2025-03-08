@@ -9,7 +9,7 @@ import SwiftUI
 
 extension MatchesListView {
     final class ViewModel: ObservableObject {
-        @Injected(\.matchRepository) var repository: MatchRepository
+        @Injected(\.matchRepository) var repository: MatchListRepository
 
         @Published var matches: [Match] = []
         @Published var loading = false
@@ -21,6 +21,7 @@ extension MatchesListView {
             }
         }
         
+        @MainActor
         func getMatches() async {
             loading = true
             hasError = false

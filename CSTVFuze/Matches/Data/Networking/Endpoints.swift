@@ -17,16 +17,6 @@ final class GetMatchesEndpoint: PandaScoreEndpoint {
     }
 }
 
-final class GetTeamEndpoint: PandaScoreEndpoint {
-    init(team: Int) {
-        super.init(
-            url: "teams/" + "\(team)",
-            method: .get,
-            params: [:]
-        )
-    }
-}
-
 final class GetOpponentsEndpoint: PandaScoreEndpoint {
     //TODO: Make this standart
     struct Opponents: Codable {
