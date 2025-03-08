@@ -14,6 +14,7 @@ protocol NetworkHandling {
 final class NetworkHandler<Session: NetworkSession>: NetworkHandling {
     func request<T: Endpoint>(_ endpoint: T) async throws -> Data {
         let url = try createUrl(endpoint)
+        print("Sending request to URL: \(url)")
         
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue

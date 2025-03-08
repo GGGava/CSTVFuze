@@ -19,7 +19,7 @@ struct MatchesListView: View {
                     .fontWeight(.medium)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                VStack(spacing: 24) {
+                LazyVStack(spacing: 24) {
                     ForEach(viewModel.matches) { match in
                         NavigationLink {
                             MatchStatsView(
@@ -37,11 +37,13 @@ struct MatchesListView: View {
             .padding(24)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.gray900)
-            .refreshable {
-                await viewModel.getMatches()
-            }
             .onAppear {
                 UIRefreshControl.appearance().tintColor = .clear
+            }
+            .refreshable {
+                Task {
+                    await viewModel.getMatches()
+                }
             }
         }
     }

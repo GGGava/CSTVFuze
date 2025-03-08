@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// TODO: Fix alignment when names have different sizes
 struct MatchCardView: View {
     var match: Match
     

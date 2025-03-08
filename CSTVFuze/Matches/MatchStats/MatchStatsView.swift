@@ -35,7 +35,7 @@ struct MatchStatsView: View {
                         .background(viewModel.matchStatus == .running ? .red : .clear)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                     
-                    HStack(spacing: 20) {
+                    HStack(alignment: .top, spacing: 20) {
                         VStack(alignment: .trailing, spacing: 20) {
                             ForEach(viewModel.teamA?.players ?? []) { player in
                                 LeadingPlayerView(player: player)
@@ -55,11 +55,13 @@ struct MatchStatsView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.gray900)
-            .refreshable {
-                await viewModel.getTeams(idA: viewModel.idTeamA, idB: viewModel.idTeamB)
-            }
             .onAppear {
                 UIRefreshControl.appearance().tintColor = .clear
+            }
+            .refreshable {
+                Task {
+                    await viewModel.getTeams()
+                }
             }
         }
     }
@@ -140,6 +142,7 @@ extension MatchStatsView {
                 .padding([.bottom], 12)
                 .frame(maxWidth: .infinity)
             }
+            .frame(height: 72)
         }
     }
     
@@ -173,6 +176,7 @@ extension MatchStatsView {
                 .padding([.horizontal, .bottom], 12)
                 .frame(maxWidth: .infinity)
             }
+            .frame(height: 72)
         }
     }
 }
@@ -195,8 +199,8 @@ extension MatchStatsView {
 }
 
 fileprivate final class MockedRepository: TeamsRepository {
-    func getTeam(id: Int) async throws -> Team {
-        .init(
+    func getMatchOpponents(matchId: Int) async throws -> [Team] {
+        [.init(
             id: 1,
             name: "Nemiga",
             players: [
@@ -214,6 +218,31 @@ fileprivate final class MockedRepository: TeamsRepository {
                     lastName: "Mikulchik"
                 )
             ]
-        )
+        ),
+         .init(
+             id: 1,
+             name: "Nemiga",
+             players: [
+                 .init(
+                     id: 1,
+                     name: "Xant3r",
+                     firstName: "Kirill",
+                     lastName: "Kononov",
+                     imageUrl: ""
+                 ),
+                 .init(
+                     id: 2,
+                     name: "keep3r",
+                     firstName: "Yuriy",
+                     lastName: "Mikulchik"
+                 ),
+                 .init(
+                     id: 3,
+                     name: "keep3r",
+                     firstName: "Yuriy",
+                     lastName: "Mikulchik"
+                 )
+             ]
+         )]
     }
 }
