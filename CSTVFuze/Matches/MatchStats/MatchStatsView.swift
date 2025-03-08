@@ -219,8 +219,8 @@ fileprivate final class MockedRepository: MatchStatsRepository {
             id: 1,
             status: .notStarted,
             opponents: [
-                .init(opponent: .init(id: 2)),
-                .init(opponent: .init(id: 3)),
+                .init(opponent: .init(name: "Team 1")),
+                .init(opponent: .init(name: "Team 2")),
             ],
             beginAt: .now
         )
@@ -228,7 +228,6 @@ fileprivate final class MockedRepository: MatchStatsRepository {
     
     func getMatchOpponents(matchId: Int) async throws -> [Team] {
         [.init(
-            id: 1,
             name: "Nemiga",
             players: [
                 .init(
@@ -247,7 +246,6 @@ fileprivate final class MockedRepository: MatchStatsRepository {
             ]
         ),
          .init(
-             id: 1,
              name: "Nemiga",
              players: [
                  .init(

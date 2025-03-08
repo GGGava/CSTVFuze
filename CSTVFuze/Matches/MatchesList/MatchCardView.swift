@@ -10,13 +10,24 @@ import SwiftUI
 struct MatchCardView: View {
     var match: Match
     
+    var teamA: Team {
+        match.opponents?.first?.opponent ?? Team.placeholder(name: "Time 1")
+    }
+
+    var teamB: Team {
+        guard let opponents = match.opponents, opponents.indices.contains(1) else {
+            return Team.placeholder(name: "Time 2")
+        }
+        return opponents[1].opponent
+    }
+    
     var body: some View {
         VStack {
             MatchTimeView(date: match.beginAt, status: match.status)
             
             TeamsVsView(
-                teamA: match.opponents?.first?.opponent,
-                teamB: match.opponents?.last?.opponent
+                teamA: teamA,
+                teamB: teamB
             )
             Divider()
                 .overlay(.white)
@@ -103,16 +114,12 @@ extension MatchCardView {
                 opponents: [
                     .init(
                         opponent: .init(
-                            id: 3,
-                            name: "Sinners",
-                            acronym: "SIN"
+                            name: "Sinners"
                         )
                     ),
                     .init(
                         opponent: .init(
-                            id: 4,
-                            name: "ECSTATIC",
-                            acronym: "ECS"
+                            name: "ECSTATIC"
                         )
                     )
                 ],

@@ -32,8 +32,8 @@ extension MatchStatsView {
             hasError = false
             do {
                 let teams = try await teamsRepository.getMatchOpponents(matchId: self.match.id)
-                self.teamA = teams.first
-                self.teamB = teams.last
+                self.teamA = teams.first ?? Team.placeholder(name: "Time 1")
+                self.teamB = teams.indices.contains(1) ? teams[1] : Team.placeholder(name: "Time 2")
             } catch {
                 print("Error while fetching opponents: \(error)")
                 hasError = true

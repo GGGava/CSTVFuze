@@ -44,7 +44,7 @@ class PandaScoreMatchStatsRepositoryTests: XCTestCase {
     }
 
     func testSuccess() async {
-        let expectedTeams = [Team(id: 1), Team(id: 2)]
+        let expectedTeams = [Team(name: "A"), Team(name: "B")]
         
         let networkMock = NetworkHandlerMock(data: Data())
 
@@ -56,8 +56,8 @@ class PandaScoreMatchStatsRepositoryTests: XCTestCase {
         do {
             let response = try await testingSubject.getMatchOpponents(matchId: 123)
             XCTAssertEqual(2, response.count)
-            XCTAssertEqual(response.first?.id, 1)
-            XCTAssertEqual(response.last?.id, 2)
+            XCTAssertEqual(response.first?.name, "A")
+            XCTAssertEqual(response.last?.name, "B")
             XCTAssertEqual(networkMock.matchId, 123)
         } catch {
             XCTFail()

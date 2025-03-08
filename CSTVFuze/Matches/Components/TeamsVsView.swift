@@ -51,15 +51,11 @@ extension TeamsVsView {
 #Preview {
     TeamsVsView(
         teamA:.init(
-            id: 3,
             name: "Sinners",
-            acronym: "SIN",
             imageUrl: "https://cdn.pandascore.co/images/team/image/127014/927px_sinners_esports_full_allmode.png"
         ),
         teamB: .init(
-            id: 4,
             name: "ECSTATIC",
-            acronym: "ECS",
             imageUrl: "https://cdn.pandascore.co/images/team/image/129856/600px_ecstatic_2023_allmode.png"
         )
     )

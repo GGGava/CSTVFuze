@@ -6,11 +6,47 @@
 //
 
 struct Team: Codable {
-    var id: Int
     var name: String?
-    var acronym: String?
     var imageUrl: String?
     var players: [Player]?
+    
+    static func placeholder(name: String) -> Team {
+        return Team(
+            name: name,
+            players: [
+                .init(
+                    id: 1,
+                    name: "Nickname",
+                    firstName: "Nome",
+                    lastName: "Jogador"
+                ),
+                .init(
+                    id: 2,
+                    name: "Nickname",
+                    firstName: "Nome",
+                    lastName: "Jogador"
+                ),
+                .init(
+                    id: 3,
+                    name: "Nickname",
+                    firstName: "Nome",
+                    lastName: "Jogador"
+                ),
+                .init(
+                    id: 4,
+                    name: "Nickname",
+                    firstName: "Nome",
+                    lastName: "Jogador"
+                ),
+                .init(
+                    id: 5,
+                    name: "Nickname",
+                    firstName: "Nome",
+                    lastName: "Jogador"
+                ),
+            ]
+        )
+    }
 }
 
 struct Opponent: Codable {
