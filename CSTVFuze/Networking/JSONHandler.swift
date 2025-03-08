@@ -13,6 +13,9 @@ protocol JSONHandling {
 
 final class JSONHandler: JSONHandling {
     func from<T>(_ type: T.Type, data: Data) throws -> T where T : Decodable {
-        try JSONDecoder().decode(type, from: data)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode(type, from: data)
     }
 }

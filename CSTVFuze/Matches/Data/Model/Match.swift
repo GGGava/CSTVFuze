@@ -18,22 +18,6 @@ struct Match: Codable, Identifiable {
     var status: Match.Status?
     var league: League?
     var opponents: [Opponent]?
-    var beginAt: String?
     var serie: Serie?
-    
-    var date: Date? {
-        guard let beginAt = beginAt else { return nil }
-        return ISO8601DateFormatter().date(from: beginAt)
-    }
-    
-    // TODO: Change for decoderStrategy
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case status
-        case league
-        case opponents
-        case beginAt = "begin_at"
-        case serie
-    }
+    var beginAt: Date?
 }

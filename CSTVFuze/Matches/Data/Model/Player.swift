@@ -11,12 +11,4 @@ struct Player: Codable, Identifiable {
     var firstName: String?
     var lastName: String?
     var imageUrl: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case firstName = "first_name"
-        case lastName = "last_name"
-        case imageUrl = "image_url"
-    }
 }

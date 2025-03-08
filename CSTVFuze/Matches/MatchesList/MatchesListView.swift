@@ -58,8 +58,8 @@ struct MatchesListView: View {
 fileprivate final class MockedRepository: MatchListRepository {
     func getMatchesList() async throws -> [Match] {
         return [
-            .init(id: 1, name: "Match 1", status: .running, beginAt: "2020-11-12T15:51:24Z"),
-            .init(id: 2, name: "Match 2", status: .notStarted, beginAt: "2020-11-14T15:51:24Z")
+            .init(id: 1, name: "Match 1", status: .running, beginAt: .now),
+            .init(id: 2, name: "Match 2", status: .notStarted, beginAt: .now)
         ]
     }
 }

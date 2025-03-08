@@ -15,7 +15,7 @@ struct MatchStatsView: View {
         if viewModel.match.status == .running {
             return "AGORA"
         }
-        return viewModel.match.date?.formatInPortuguese() ?? "???"
+        return viewModel.match.beginAt?.formatInPortuguese() ?? "???"
     }
 
     var serieLeagueName: String {
@@ -222,7 +222,7 @@ fileprivate final class MockedRepository: MatchStatsRepository {
                 .init(opponent: .init(id: 2)),
                 .init(opponent: .init(id: 3)),
             ],
-            beginAt: "2025-03-07T15:51:24Z"
+            beginAt: .now
         )
     }
     

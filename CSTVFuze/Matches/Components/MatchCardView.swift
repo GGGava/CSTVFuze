@@ -13,7 +13,7 @@ struct MatchCardView: View {
     
     var body: some View {
         VStack {
-            MatchTimeView(date: match.date, status: match.status)
+            MatchTimeView(date: match.beginAt, status: match.status)
             
             TeamsVsView(
                 teamA: match.opponents?.first?.opponent,

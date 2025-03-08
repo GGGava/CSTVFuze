@@ -11,14 +11,6 @@ struct Team: Codable {
     var acronym: String?
     var imageUrl: String?
     var players: [Player]?
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case acronym
-        case imageUrl = "image_url"
-        case players
-    }
 }
 
 struct Opponent: Codable {
