@@ -12,7 +12,6 @@ struct SplashScreen: View {
         ZStack {
             Image(.fuzeLogo)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
                 .frame(width: 150, height: 150)
         }
         .ignoresSafeArea()

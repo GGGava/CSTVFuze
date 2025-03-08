@@ -83,6 +83,7 @@ struct MatchStatsView: View {
                 }
             }
             .navigationBarBackButtonHidden(true)
+            .toolbarBackground(.gray900)
         }
     }
 }
