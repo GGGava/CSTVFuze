@@ -7,26 +7,15 @@
 
 import SwiftUI
 
-protocol MatchesListViewModel {
-    var matches: [Match] { get }
-    var loading: Bool { get }
-    var hasError: Bool { get }
-    
-    func getMatches() async
-}
-
 extension MatchesListView {
-    @Observable
-    final class ViewModel<Repository: MatchRepository>: MatchesListViewModel {
-        var matches: [Match] = []
-        var loading = false
-        var hasError = false
+    final class ViewModel: ObservableObject {
+        @Injected(\.matchRepository) var repository: MatchRepository
 
-        //TODO: Inject repository
-        let repository: Repository
+        @Published var matches: [Match] = []
+        @Published var loading = false
+        @Published var hasError = false
         
-        init(repository: Repository) {
-            self.repository = repository
+        init() {
             Task {
                 await getMatches()
             }

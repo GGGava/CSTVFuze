@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MatchesListView: View {
-    @State var viewModel: MatchesListViewModel
+    @ObservedObject var viewModel: ViewModel
 
     var body: some View {
         NavigationStack {
@@ -50,18 +50,13 @@ struct MatchesListView: View {
 }
 
 #Preview {
-    MatchesListView(
-        viewModel:
-            MatchesListView.ViewModel(
-                repository: MockedRepository()
-            )
-    )
+    InjectedValues[\.matchRepository] = MockedRepository()
+
+    return MatchesListView(viewModel: MatchesListView.ViewModel())
 }
 
 fileprivate final class MockedRepository: MatchRepository {
     func getMatchesList() async throws -> [Match] {
-        //try await Task.sleep(nanoseconds: UInt64(1 * Double(NSEC_PER_SEC)))
-        //throw NSError(domain: "123", code: 1)
         return [
             .init(id: 1, name: "Match 1", status: .running, beginAt: "2020-11-12T15:51:24Z"),
             .init(id: 2, name: "Match 2", status: .notStarted, beginAt: "2020-11-14T15:51:24Z")

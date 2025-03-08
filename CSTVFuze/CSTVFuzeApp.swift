@@ -11,9 +11,7 @@ import SwiftUI
 struct CSTVFuzeApp: App {
     @State var showSplashScreen = true
     
-    var matchesViewModel = MatchesListView.ViewModel(
-        repository: PandaScoreMatchRepository()
-    )
+    var matchesViewModel = MatchesListView.ViewModel()
 
     var body: some Scene {
         WindowGroup {
