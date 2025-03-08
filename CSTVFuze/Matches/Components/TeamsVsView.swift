@@ -33,7 +33,7 @@ extension TeamsVsView {
         
         var body: some View {
             VStack(spacing: 10) {
-                AsyncLogoView(imageUrl: team?.imageUrl)
+                CachedAsyncLogoView(imageUrl: team?.imageUrl)
                 .frame(width: 60, height: 60)
                 
                 Text(team?.name ?? "Time 1")

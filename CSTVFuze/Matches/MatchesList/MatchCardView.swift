@@ -75,7 +75,7 @@ extension MatchCardView {
 
         var body: some View {
             HStack() {
-                AsyncLogoView(imageUrl: league?.imageUrl)
+                CachedAsyncLogoView(imageUrl: league?.imageUrl)
                     .frame(width: 24, height: 24)
                 Text((league?.name ?? "Liga") + " " + (serie?.name ?? ""))
                     .font(size: 8)
