@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MatchStatsView: View {
     @StateObject var viewModel: ViewModel
+    @Environment(\.dismiss) var dismiss
     
     var matchTimeString: String {
         if viewModel.matchStatus == .running {
@@ -25,7 +26,6 @@ struct MatchStatsView: View {
                         teamA: viewModel.teamA,
                         teamB: viewModel.teamB
                     )
-                    .padding(24)
                     
                     Text(matchTimeString)
                         .font(size: 12)
@@ -63,6 +63,26 @@ struct MatchStatsView: View {
                     await viewModel.getTeams()
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "arrow.left")
+                            .resizable()
+                            .foregroundStyle(.white)
+                            .frame(width: 24, height: 24)
+                    }
+                }
+                ToolbarItem(placement: .principal) {
+                    Text(viewModel.serieLeagueName)
+                        .font(size: 18)
+                        .fontWeight(.medium)
+                        .foregroundStyle(.white)
+                        .multilineTextAlignment(.center)
+                }
+            }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
@@ -182,7 +202,7 @@ extension MatchStatsView {
 }
 
 #Preview {
-    InjectedValues[\.teamsRepository] = MockedRepository()
+    InjectedValues[\.opponentsRepository] = MockedRepository()
     return MatchStatsView(
         viewModel: .init(
             match: .init(
@@ -198,7 +218,7 @@ extension MatchStatsView {
     )
 }
 
-fileprivate final class MockedRepository: TeamsRepository {
+fileprivate final class MockedRepository: OpponentsRepository {
     func getMatchOpponents(matchId: Int) async throws -> [Team] {
         [.init(
             id: 1,

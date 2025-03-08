@@ -25,6 +25,29 @@ struct TeamsVsView: View {
     }
 }
 
+// MARK: Subviews
+
+extension TeamsVsView {
+    struct TeamBadgeView: View {
+        var team: Team?
+        
+        var body: some View {
+            VStack(spacing: 10) {
+                AsyncLogoView(imageUrl: team?.imageUrl)
+                .frame(width: 60, height: 60)
+                
+                Text(team?.name ?? "Time 1")
+                    .font(size: 12)
+                    .fontWeight(.medium)
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                    .allowsTightening(true)
+                    .frame(width: 100)
+            }
+        }
+    }
+}
+
 #Preview {
     TeamsVsView(
         teamA:.init(

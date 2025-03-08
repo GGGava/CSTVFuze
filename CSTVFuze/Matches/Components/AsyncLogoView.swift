@@ -11,6 +11,7 @@ struct AsyncLogoView: View {
     var imageUrl: String?
     
     var body: some View {
+        // TODO: Improve performance of async image: Add "thumbnail_" to url and possibly cache the result
         AsyncImage(url: URL(string: imageUrl ?? "")) { result in
             if let image = result.image {
                 image

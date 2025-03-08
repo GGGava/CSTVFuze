@@ -5,12 +5,12 @@
 //  Created by Gustavo Gava on 07/03/2025.
 //
 
-protocol TeamsRepository {
+protocol OpponentsRepository {
     func getMatchOpponents(matchId: Int) async throws -> [Team] 
 }
 
-// TODO: Rename
-struct PandaScoreTeamsRepository: TeamsRepository {
+// TODO: Add tests
+struct PandaScoreOpponentsRepository: OpponentsRepository {
     @Injected(\.networkHandler) var networkHandler: NetworkHandling
     @Injected(\.jsonHandler) var jsonHandler: JSONHandling
     

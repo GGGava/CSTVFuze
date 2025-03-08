@@ -26,6 +26,7 @@ struct Match: Codable, Identifiable {
         return ISO8601DateFormatter().date(from: beginAt)
     }
     
+    // TODO: Change for decoderStrategy
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -33,5 +34,6 @@ struct Match: Codable, Identifiable {
         case league
         case opponents
         case beginAt = "begin_at"
+        case serie
     }
 }

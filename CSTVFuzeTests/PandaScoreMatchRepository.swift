@@ -42,7 +42,7 @@ class PandaScoreMatchRepositoryTests: XCTestCase {
             }
         }
     }
-    
+
     func testSuccess() async {
         let expectedArticles = [Match(id: 1, name: "TestMatch")]
         InjectedValues[\.networkHandler] = NetworkHandlerMock(data: Data())

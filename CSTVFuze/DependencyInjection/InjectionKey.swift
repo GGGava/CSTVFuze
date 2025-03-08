@@ -25,8 +25,8 @@ private struct MatchRepositoryKey: InjectionKey {
     static var currentValue: MatchRepository = PandaScoreMatchRepository()
 }
 
-private struct TeamsRepositoryKey: InjectionKey {
-    static var currentValue: TeamsRepository = PandaScoreTeamsRepository()
+private struct OponnentsRepositoryKey: InjectionKey {
+    static var currentValue: OpponentsRepository = PandaScoreOpponentsRepository()
 }
 
 extension InjectedValues {
@@ -45,8 +45,8 @@ extension InjectedValues {
         set { Self[MatchRepositoryKey.self] = newValue }
     }
     
-    var teamsRepository: TeamsRepository {
-        get { Self[TeamsRepositoryKey.self] }
-        set { Self[TeamsRepositoryKey.self] = newValue }
+    var opponentsRepository: OpponentsRepository {
+        get { Self[OponnentsRepositoryKey.self] }
+        set { Self[OponnentsRepositoryKey.self] = newValue }
     }
 }

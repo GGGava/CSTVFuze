@@ -9,13 +9,14 @@ import SwiftUI
 
 extension MatchStatsView {
     final class ViewModel: ObservableObject {
-        @Injected(\.teamsRepository) var teamsRepository: TeamsRepository
+        @Injected(\.opponentsRepository) var teamsRepository: OpponentsRepository
 
         @Published var teamA: Team?
         @Published var teamB: Team?
         
         var matchStatus: Match.Status?
         var matchTime: Date?
+        var serieLeagueName: String
         
         @Published var loading: Bool = false
         @Published var hasError: Bool = false
@@ -26,6 +27,7 @@ extension MatchStatsView {
             self.matchStatus = match.status
             self.matchTime = match.date
             self.matchId = match.id
+            self.serieLeagueName = "\(match.league?.name ?? "") " + (match.serie?.name ?? "")
 
             Task {
                 await getTeams()
