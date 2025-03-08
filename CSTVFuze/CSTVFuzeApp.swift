@@ -20,7 +20,7 @@ struct CSTVFuzeApp: App {
                         showSplashScreen = false
                     }
             } else {
-                MatchesListView(viewModel: MatchesListView.ViewModel())
+                MatchListView(viewModel: MatchListViewModel())
             }
         }
     }

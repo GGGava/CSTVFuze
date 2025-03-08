@@ -40,12 +40,12 @@ extension InjectedValues {
         set { Self[JSONHandlerKey.self] = newValue }
     }
     
-    var matchRepository: MatchListRepository {
+    var matchListRepository: MatchListRepository {
         get { Self[MatchListRepositoryKey.self] }
         set { Self[MatchListRepositoryKey.self] = newValue }
     }
     
-    var opponentsRepository: MatchStatsRepository {
+    var matchStatsRepository: MatchStatsRepository {
         get { Self[OpponentsRepositoryKey.self] }
         set { Self[OpponentsRepositoryKey.self] = newValue }
     }

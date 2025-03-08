@@ -11,9 +11,9 @@ import XCTest
 class PandaScoreMatchListRepositoryTests: XCTestCase {
     let testingSubject = PandaScoreMatchListRepository()
     
-    override func tearDown() {
-        InjectedValues[\.networkHandler] = NetworkHandler<URLSession>()
-        InjectedValues[\.jsonHandler] = JSONHandler()
+    override class func setUp() {
+        InjectedValues[\.networkHandler] = NetworkHandlerMock()
+        InjectedValues[\.jsonHandler] = JsonHandlerMock()
     }
 
     func testGetMatchesListDataError() async {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MatchStatsView: View {
-    @StateObject var viewModel: ViewModel
+    @StateObject var viewModel: MatchStatsViewModel
     @Environment(\.dismiss) var dismiss
     
     var matchTimeString: String {
@@ -203,7 +203,7 @@ extension MatchStatsView {
 }
 
 #Preview {
-    InjectedValues[\.opponentsRepository] = MockedRepository()
+    InjectedValues[\.matchStatsRepository] = MockedRepository()
     return MatchStatsView(
         viewModel: .init(
             match: .init(

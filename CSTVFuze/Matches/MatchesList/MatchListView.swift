@@ -1,5 +1,5 @@
 //
-//  MatchesView.swift
+//  MatchListView.swift
 //  CSTVFuze
 //
 //  Created by Gustavo Gava on 05/03/2025.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct MatchesListView: View {
-    @ObservedObject var viewModel: ViewModel
+struct MatchListView: View {
+    @ObservedObject var viewModel: MatchListViewModel
 
     var body: some View {
         NavigationStack {
@@ -23,7 +23,7 @@ struct MatchesListView: View {
                     ForEach(viewModel.matches) { match in
                         NavigationLink {
                             MatchStatsView(
-                                viewModel: MatchStatsView.ViewModel(
+                                viewModel: MatchStatsViewModel(
                                     match: match
                                 )
                             )
@@ -61,9 +61,9 @@ struct MatchesListView: View {
 }
 
 #Preview {
-    InjectedValues[\.matchRepository] = MockedRepository()
+    InjectedValues[\.matchListRepository] = MockedRepository()
 
-    return MatchesListView(viewModel: MatchesListView.ViewModel())
+    return MatchListView(viewModel: MatchListViewModel())
 }
 
 fileprivate final class MockedRepository: MatchListRepository {
