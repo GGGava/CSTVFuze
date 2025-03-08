@@ -14,11 +14,11 @@ struct LoadingViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             if loading {
-                //TODO: Better center this view
                 ProgressView()
                     .controlSize(.large)
                     .tint(.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .containerRelativeFrame([.vertical])
             } else if hasError {
                 Text("Something went wrong.")
                     .foregroundColor(.white)
