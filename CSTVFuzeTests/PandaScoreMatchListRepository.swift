@@ -8,8 +8,8 @@
 import XCTest
 @testable import CSTVFuze
 
-class PandaScoreMatchRepositoryTests: XCTestCase {
-    let testingSubject = PandaScoreMatchRepository()
+class PandaScoreMatchListRepositoryTests: XCTestCase {
+    let testingSubject = PandaScoreMatchListRepository()
     
     override func tearDown() {
         InjectedValues[\.networkHandler] = NetworkHandler<URLSession>()
@@ -44,10 +44,10 @@ class PandaScoreMatchRepositoryTests: XCTestCase {
     }
 
     func testSuccess() async {
-        let expectedArticles = [Match(id: 1, name: "TestMatch")]
+        let expectedMatches = [Match(id: 1, name: "TestMatch")]
         InjectedValues[\.networkHandler] = NetworkHandlerMock(data: Data())
         InjectedValues[\.jsonHandler] = JsonHandlerMock(
-            response: expectedArticles
+            response: expectedMatches
         )
         
         do {

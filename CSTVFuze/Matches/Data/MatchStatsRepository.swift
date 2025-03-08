@@ -9,15 +9,18 @@ protocol MatchStatsRepository {
     func getMatchOpponents(matchId: Int) async throws -> [Team]
 }
 
-// TODO: Add tests
 struct PandaScoreMatchStatsRepository: MatchStatsRepository {
     @Injected(\.networkHandler) var networkHandler: NetworkHandling
     @Injected(\.jsonHandler) var jsonHandler: JSONHandling
     
+    struct Opponents: Codable {
+        var opponents: [Team]
+    }
+    
     func getMatchOpponents(matchId: Int) async throws -> [Team] {
         let endpoint = GetOpponentsEndpoint(matchId: matchId)
         let data = try await networkHandler.request(endpoint)
-        let opponents = try jsonHandler.from(GetOpponentsEndpoint.Opponents.self, data: data)
+        let opponents = try jsonHandler.from(Opponents.self, data: data)
         return opponents.opponents
     }
 }

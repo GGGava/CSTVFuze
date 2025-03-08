@@ -10,8 +10,6 @@ import SwiftUI
 @main
 struct CSTVFuzeApp: App {
     @State var showSplashScreen = true
-    
-    var matchesViewModel = MatchesListView.ViewModel()
 
     var body: some Scene {
         WindowGroup {
@@ -22,7 +20,7 @@ struct CSTVFuzeApp: App {
                         showSplashScreen = false
                     }
             } else {
-                MatchesListView(viewModel: matchesViewModel)
+                MatchesListView(viewModel: MatchesListView.ViewModel())
             }
         }
     }

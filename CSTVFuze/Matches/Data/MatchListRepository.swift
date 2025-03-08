@@ -14,7 +14,6 @@ struct PandaScoreMatchListRepository: MatchListRepository {
     @Injected(\.jsonHandler) var jsonHandler: JSONHandling
 
     func getMatchesList() async throws -> [Match] {
-        // TODO: Get finished matches today. Possibly move parameters out of the repository.
         let endpoint = GetMatchesEndpoint(
             params: [
                 "filter[status]":"running,not_started",
