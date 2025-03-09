@@ -19,6 +19,7 @@
 /* Begin PBXFileReference section */
 		7E99C68F2D78DCEE000B99D4 /* CSTVFuze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSTVFuze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E99C69F2D78DCF0000B99D4 /* CSTVFuzeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CSTVFuzeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EF7D9B52D7DC516002CB9CF /* CSTVFuze.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CSTVFuze.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -68,6 +69,7 @@
 		7E99C6862D78DCEE000B99D4 = {
 			isa = PBXGroup;
 			children = (
+				7EF7D9B52D7DC516002CB9CF /* CSTVFuze.xctestplan */,
 				7E99C6912D78DCEE000B99D4 /* CSTVFuze */,
 				7E99C6A22D78DCF0000B99D4 /* CSTVFuzeTests */,
 				7E99C6902D78DCEE000B99D4 /* Products */,

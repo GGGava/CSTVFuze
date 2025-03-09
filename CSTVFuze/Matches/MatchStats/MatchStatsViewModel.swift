@@ -17,11 +17,13 @@ final class MatchStatsViewModel: ObservableObject {
     @Published var loading: Bool = false
     @Published var hasError: Bool = false
     
-    init(match: Match) {
+    init(match: Match, fetchData: Bool = true) {
         self.match = match
 
-        Task {
-            await getTeams()
+        if fetchData {
+            Task {
+                await getTeams()
+            }
         }
     }
     

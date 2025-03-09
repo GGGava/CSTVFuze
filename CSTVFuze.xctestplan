@@ -1,0 +1,35 @@
+{
+  "configurations" : [
+    {
+      "id" : "B5817D96-E57E-4117-8571-C7F7B623B26D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "PANDA_API_KEY",
+        "value" : "2VphEMCHfNVYE3tJ7YSZ0SroWqFvO5wXCo5Nx5pjsYbyLVj9rrU"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:CSTVFuze.xcodeproj",
+      "identifier" : "7E99C68E2D78DCEE000B99D4",
+      "name" : "CSTVFuze"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:CSTVFuze.xcodeproj",
+        "identifier" : "7E99C69E2D78DCF0000B99D4",
+        "name" : "CSTVFuzeTests"
+      }
+    }
+  ],
+  "version" : 1
+}

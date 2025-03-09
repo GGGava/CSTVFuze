@@ -16,26 +16,26 @@ class MatchListViewModelTests: XCTestCase {
         await testingSubject.getMatches()
 
         XCTAssertEqual(testingSubject.matches.count, 0)
-        XCTAssertEqual(testingSubject.loading, false)
-        XCTAssertEqual(testingSubject.hasError, true)
+        XCTAssertFalse(testingSubject.loading)
+        XCTAssertTrue(testingSubject.hasError)
         XCTAssertEqual(testingSubject.nextPage, 1)
-        XCTAssertEqual(testingSubject.loadingNextPage, false)
-        XCTAssertEqual(testingSubject.finishedPages, false)
+        XCTAssertFalse(testingSubject.loadingNextPage)
+        XCTAssertFalse(testingSubject.finishedPages)
     }
 
     func testGetMatchListSuccessEmpty() async {
         let expectedResult: [Match] = []
         InjectedValues[\.matchListRepository] = MatchListRepositoryMock(data: expectedResult)
 
-        var testingSubject = MatchListViewModel(fetchData: false)
+        let testingSubject = MatchListViewModel(fetchData: false)
         await testingSubject.getMatches()
 
         XCTAssertEqual(testingSubject.matches.count, expectedResult.count)
-        XCTAssertEqual(testingSubject.loading, false)
-        XCTAssertEqual(testingSubject.hasError, false)
+        XCTAssertFalse(testingSubject.loading)
+        XCTAssertFalse(testingSubject.hasError)
         XCTAssertEqual(testingSubject.nextPage, 2)
-        XCTAssertEqual(testingSubject.loadingNextPage, false)
-        XCTAssertEqual(testingSubject.finishedPages, false)
+        XCTAssertFalse(testingSubject.loadingNextPage)
+        XCTAssertFalse(testingSubject.finishedPages)
     }
 
     func testGetMatchListSuccess() async {
@@ -49,11 +49,11 @@ class MatchListViewModelTests: XCTestCase {
 
         XCTAssertEqual(testingSubject.matches.count, expectedResult.count)
         XCTAssertEqual(testingSubject.matches.first?.id, expectedResult.first?.id)
-        XCTAssertEqual(testingSubject.loading, false)
-        XCTAssertEqual(testingSubject.hasError, false)
+        XCTAssertFalse(testingSubject.loading)
+        XCTAssertFalse(testingSubject.hasError)
         XCTAssertEqual(testingSubject.nextPage, 2)
-        XCTAssertEqual(testingSubject.loadingNextPage, false)
-        XCTAssertEqual(testingSubject.finishedPages, false)
+        XCTAssertFalse(testingSubject.loadingNextPage)
+        XCTAssertFalse(testingSubject.finishedPages)
     }
 
     func testLoadMoreError() async {
@@ -63,11 +63,11 @@ class MatchListViewModelTests: XCTestCase {
         await testingSubject.loadMore()
 
         XCTAssertEqual(testingSubject.matches.count, 0)
-        XCTAssertEqual(testingSubject.loading, false)
-        XCTAssertEqual(testingSubject.hasError, false)
+        XCTAssertFalse(testingSubject.loading)
+        XCTAssertFalse(testingSubject.hasError)
         XCTAssertEqual(testingSubject.nextPage, 1)
-        XCTAssertEqual(testingSubject.loadingNextPage, false)
-        XCTAssertEqual(testingSubject.finishedPages, false)
+        XCTAssertFalse(testingSubject.loadingNextPage)
+        XCTAssertFalse(testingSubject.finishedPages)
     }
 
     func testLoadMoreSuccessEmpty() async {
@@ -79,11 +79,11 @@ class MatchListViewModelTests: XCTestCase {
         await testingSubject.loadMore()
 
         XCTAssertEqual(testingSubject.matches.count, 0)
-        XCTAssertEqual(testingSubject.loading, false)
-        XCTAssertEqual(testingSubject.hasError, false)
+        XCTAssertFalse(testingSubject.loading)
+        XCTAssertFalse(testingSubject.hasError)
         XCTAssertEqual(testingSubject.nextPage, 1)
-        XCTAssertEqual(testingSubject.loadingNextPage, false)
-        XCTAssertEqual(testingSubject.finishedPages, true)
+        XCTAssertFalse(testingSubject.loadingNextPage)
+        XCTAssertTrue(testingSubject.finishedPages)
     }
 
     func testLoadMoreSuccessAppendingAndFinished() async {
@@ -99,11 +99,11 @@ class MatchListViewModelTests: XCTestCase {
         XCTAssertEqual(testingSubject.matches.count, 2)
         XCTAssertEqual(testingSubject.matches.first?.id, 1)
         XCTAssertEqual(testingSubject.matches.last?.id, 2)
-        XCTAssertEqual(testingSubject.loading, false)
-        XCTAssertEqual(testingSubject.hasError, false)
+        XCTAssertFalse(testingSubject.loading)
+        XCTAssertFalse(testingSubject.hasError)
         XCTAssertEqual(testingSubject.nextPage, 1)
-        XCTAssertEqual(testingSubject.loadingNextPage, false)
-        XCTAssertEqual(testingSubject.finishedPages, true)
+        XCTAssertFalse(testingSubject.loadingNextPage)
+        XCTAssertTrue(testingSubject.finishedPages)
         XCTAssertEqual(mock.page, 1)
     }
 
@@ -124,13 +124,12 @@ class MatchListViewModelTests: XCTestCase {
         XCTAssertEqual(testingSubject.matches.count, 11)
         XCTAssertEqual(testingSubject.matches.first?.id, 1)
         XCTAssertEqual(testingSubject.matches.last?.id, 11)
-        XCTAssertEqual(testingSubject.loading, false)
-        XCTAssertEqual(testingSubject.hasError, false)
+        XCTAssertFalse(testingSubject.loading)
+        XCTAssertFalse(testingSubject.hasError)
         XCTAssertEqual(testingSubject.nextPage, 2)
-        XCTAssertEqual(testingSubject.loadingNextPage, false)
-        XCTAssertEqual(testingSubject.finishedPages, false)
+        XCTAssertFalse(testingSubject.loadingNextPage)
+        XCTAssertFalse(testingSubject.finishedPages)
         XCTAssertEqual(mock.page, 1)
-        
     }
 }
 
