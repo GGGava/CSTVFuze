@@ -11,22 +11,23 @@
 
 import SwiftUI
 
-struct CachedAsyncLogoView: View {
+struct CachedAsyncLogoView<Placeholder: View>: View {
     private let url: URL?
+    @ViewBuilder private let placeholder: Placeholder
     @State private var image: Image? = nil
     @State private var isLoading = false
 
-    public init(imageUrl: String?) {
+    public init(imageUrl: String?, placeholder: Placeholder = Circle()) {
         self.url = thumbUrl(from: imageUrl ?? "")
+        self.placeholder = placeholder
     }
 
     public var body: some View {
         if let image = image {
             image
                 .resizable()
-                .scaledToFit()
         } else {
-            Circle()
+            placeholder
                 .foregroundStyle(.gray300)
                 .onAppear {
                     Task {

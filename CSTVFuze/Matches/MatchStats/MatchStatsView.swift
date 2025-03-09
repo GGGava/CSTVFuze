@@ -96,16 +96,7 @@ extension MatchStatsView {
         var imageUrl: String
 
         var body: some View {
-            AsyncImage(url: URL(string: imageUrl)) { result in
-                if let image = result.image {
-                    image
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                } else {
-                    Rectangle()
-                        .foregroundStyle(.gray300)
-                }
-            }
+            CachedAsyncLogoView(imageUrl: imageUrl, placeholder: Rectangle())
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .frame(width: 60, height: 60)
         }
