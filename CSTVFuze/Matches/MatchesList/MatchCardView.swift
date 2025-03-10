@@ -92,7 +92,7 @@ extension MatchCardView {
                     .font(size: 8)
                     .fontWeight(.medium)
                     .foregroundStyle(.white)
-                Spacer()
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding([.top, .trailing], 8)
             .padding([.leading, .bottom], 16)
