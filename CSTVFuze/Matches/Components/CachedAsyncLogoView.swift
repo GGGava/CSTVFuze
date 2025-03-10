@@ -1,5 +1,5 @@
 //
-//  LogoView.swift
+//  CachedAsyncLogoView.swift
 //  CSTVFuze
 //
 //  Created by Gustavo Gava on 06/03/2025.
