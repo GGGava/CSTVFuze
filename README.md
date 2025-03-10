@@ -3,7 +3,7 @@
 
 ## Usage
 Before running this project go to `"Edit Scheme" -> "Arguments" -> "Environment Variables"` and add a new key `PANDA_API_KEY`, then add your Panda Score API Key as the value.
-Note that the environment variable will only be available when running the project through XCode. All network requests **will fail** if the app is opened withour XCode. If you need to run the app without XCode, go to file `CSTVFuze/Matches/Data/Networking/Endpoints.swift` and hardcode your API Key in `line 41`.
+Note that the environment variable will only be available when running the project through XCode. All network requests **will fail** if the app is opened without XCode. If you need to run the app without XCode, go to file `CSTVFuze/Matches/Data/Networking/Endpoints.swift` and hardcode your API Key in `line 41`.
 
 No additional steps are required. No dependencies were added to this project.
 
